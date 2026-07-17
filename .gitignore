@@ -1,6 +1,7 @@
 # Environments
 venv/
 .venv/
+H:\langchain\langchain\.env
 env/
 .env
 

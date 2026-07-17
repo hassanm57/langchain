@@ -1,7 +1,8 @@
-from langchain.chat_models import ChatOpenAI
-
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+load_dotenv()
 model = ChatOpenAI(model_name="gpt-4", temperature=0.8)
 prompt = "Hello! How can I assist you today?"
 
-llm = model.generate([prompt])
-print(llm[0].text)
+response = model.invoke(prompt)
+print(response.content)
