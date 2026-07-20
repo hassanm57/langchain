@@ -4,7 +4,8 @@ venv/
 H:\langchain\langchain\.env
 env/
 .env
-
+.env.example
+.gitignore
 # Python
 __pycache__/
 *.pyc
