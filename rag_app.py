@@ -16,10 +16,10 @@ load_dotenv()
 PDF_URL = "https://arxiv.org/pdf/1706.03762"  # "Attention Is All You Need"
 
 
-def download_pdf(url: str) -> str:
-    response = requests.get(url, timeout=30)
-    response.raise_for_status()
-    tmp_file = tempfile.NamedTemporaryFile(suffix=".pdf", delete=False)
+def download_pdf(url: str) -> str: # ths func basically downloads the pdf from the url and saves it to a temporary file, returning the path to that file
+    response = requests.get(url, timeout=30) # the timeout makes sure the request doesn't hang indefinitely
+    response.raise_for_status() # raises an error if the request was unsuccessful (e.g., 404 or 500 status codes)
+    tmp_file = tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) # 
     tmp_file.write(response.content)
     tmp_file.close()
     return tmp_file.name
@@ -32,7 +32,7 @@ def build_retriever(pdf_path: str):
 
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     vector_store = FAISS.from_documents(chunks, embeddings)
-    return vector_store.as_retriever(search_kwargs={"k": 4})
+    return vector_store.as_retriever(search_kwargs={"k": 4}) # returns max 4 results
 
 
 def format_docs(docs) -> str:
