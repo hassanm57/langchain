@@ -79,7 +79,7 @@ def main():
 
     print("Ready. Ask questions about the document (type 'exit' to quit).\n")
     while True:
-        question = input("You: ").strip()
+        question = input("You: ").strip() # strips whitespace from the input (WHY?) - because we want to avoid issues with accidental spaces before or after the question, which could affect how we process the input.
         if question.lower() in {"exit", "quit"}:
             break
         if not question:
