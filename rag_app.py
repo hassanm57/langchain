@@ -55,11 +55,11 @@ def build_chain(retriever):
         "Context:\n{context}\n\nQuestion: {question}"
     )
 
-    return (
+    return ( # this 
         {"context": retriever | format_docs, "question": RunnablePassthrough()} # this line creates a dictionary with two keys: "context" and "question". The value for "context" is the output of the retriever passed through the format_docs function, and the value for "question" is a passthrough runnable that will take the user's input question.
         | prompt
         | llm
-        | StrOutputParser()
+        | StrOutputParser() # this line converts the model's output to a string
     )
 
 
