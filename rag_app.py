@@ -44,7 +44,7 @@ def build_chain(retriever):
         repo_id="meta-llama/Llama-3.1-8B-Instruct",
         task="text-generation",
         max_new_tokens=512,
-        temperature=0.1,
+        temperature=0.1, # makes the model's output more deterministic
         huggingfacehub_api_token=os.environ["HUGGINGFACEHUB_API_TOKEN"],
     )
     llm = ChatHuggingFace(llm=llm_endpoint)
@@ -56,7 +56,7 @@ def build_chain(retriever):
     )
 
     return (
-        {"context": retriever | format_docs, "question": RunnablePassthrough()}
+        {"context": retriever | format_docs, "question": RunnablePassthrough()} # this line creates a dictionary with two keys: "context" and "question". The value for "context" is the output of the retriever passed through the format_docs function, and the value for "question" is a passthrough runnable that will take the user's input question.
         | prompt
         | llm
         | StrOutputParser()
